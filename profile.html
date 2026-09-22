@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LifeLink | My Profile</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/profile.css">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- Sidebar -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+            <i class="fa-solid fa-droplet"></i>
+            <h2>LifeLink</h2>
+        </div>
+
+        <ul>
+            <li><a href="dashboard.html"><i class="fa-solid fa-house"></i> Dashboard</a></li>
+            <li><a href="profile.html" class="active"><i class="fa-solid fa-user"></i> Profile</a></li>
+            <li><a href="search.html"><i class="fa-solid fa-magnifying-glass"></i> Search Blood</a></li>
+            <li><a href="request.html"><i class="fa-solid fa-hand-holding-droplet"></i> Request Blood</a></li>
+            <li><a href="admin.html"><i class="fa-solid fa-user-shield"></i> Admin</a></li>
+            <li><a href="login.html"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></li>
+        </ul>
+
+    </aside>
+
+
+
+    <!-- Main Content -->
+
+    <main class="main-content">
+
+        <header class="topbar">
+            <h2>My Profile</h2>
+        </header>
+
+
+
+        <!-- Profile Card -->
+
+        <section class="profile-card">
+
+            <div class="profile-image">
+
+                <img src="images/profile.png" alt="Profile">
+
+                <button>
+                    <i class="fa-solid fa-camera"></i>
+                </button>
+
+            </div>
+
+            <div class="profile-info">
+
+                <h2>Nisha</h2>
+
+                <p><strong>Blood Group:</strong> O+</p>
+
+                <p><strong>Donor ID:</strong> LL100245</p>
+
+                <p><strong>Status:</strong> Active Donor</p>
+
+                <p><strong>Badge:</strong> 🥈 Silver Donor</p>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- Personal Information -->
+
+        <section class="details">
+
+            <h2>Personal Information</h2>
+
+            <form>
+
+                <div class="row">
+
+                    <div class="input-box">
+                        <label>Full Name</label>
+                        <input type="text" value="Nisha">
+                    </div>
+
+                    <div class="input-box">
+                        <label>Email</label>
+                        <input type="email" value="nisha@email.com">
+                    </div>
+
+                </div>
+
+
+
+                <div class="row">
+
+                    <div class="input-box">
+                        <label>Phone Number</label>
+                        <input type="tel" value="9876543210">
+                    </div>
+
+                    <div class="input-box">
+                        <label>Age</label>
+                        <input type="number" value="20">
+                    </div>
+
+                </div>
+
+
+
+                <div class="row">
+
+                    <div class="input-box">
+                        <label>Gender</label>
+
+                        <select>
+
+                            <option>Female</option>
+
+                            <option>Male</option>
+
+                            <option>Other</option>
+
+                        </select>
+
+                    </div>
+
+                    <div class="input-box">
+                        <label>Weight</label>
+                        <input type="number" value="58">
+                    </div>
+
+                </div>
+
+
+
+                <div class="input-box">
+
+                    <label>Address</label>
+
+                    <textarea rows="4">Chennai, Tamil Nadu</textarea>
+
+                </div>
+
+                <button type="submit">
+
+                    <i class="fa-solid fa-floppy-disk"></i>
+
+                    Save Changes
+
+                </button>
+
+            </form>
+
+        </section>
+
+
+
+        <!-- Donation Information -->
+
+        <section class="donation-info">
+
+            <div class="info-card">
+
+                <i class="fa-solid fa-calendar-days"></i>
+
+                <h3>Last Donation</h3>
+
+                <p>15 March 2026</p>
+
+            </div>
+
+            <div class="info-card">
+
+                <i class="fa-solid fa-heart"></i>
+
+                <h3>Lives Saved</h3>
+
+                <p>09</p>
+
+            </div>
+
+            <div class="info-card">
+
+                <i class="fa-solid fa-calendar-check"></i>
+
+                <h3>Next Eligible Date</h3>
+
+                <p>12 October 2026</p>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- QR Code -->
+
+        <section class="qr-section">
+
+            <h2>Digital Donor Card</h2>
+
+            <img src="images/qr-code.png" alt="QR Code">
+
+            <p>Scan this QR Code to verify donor details.</p>
+
+            <button>
+
+                <i class="fa-solid fa-download"></i>
+
+                Download Donor Card
+
+            </button>
+
+        </section>
+
+    </main>
+
+</div>
+
+<script src="js/script.js"></script>
+
+</body>
+</html>

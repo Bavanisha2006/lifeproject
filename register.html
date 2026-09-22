@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LifeLink | Donor Registration</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/register.css">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- Left Side -->
+
+    <div class="left-panel">
+
+        <div class="content">
+
+            <h1><i class="fa-solid fa-droplet"></i> LifeLink</h1>
+
+            <h2>Become a Blood Donor</h2>
+
+            <p>
+                Your single donation can save multiple lives.
+                Join our growing community of heroes and help
+                patients in need.
+            </p>
+
+            <img src="images/register-blood.png"
+                 alt="Blood Donation">
+
+        </div>
+
+    </div>
+
+
+
+    <!-- Right Side -->
+
+    <div class="right-panel">
+
+        <div class="register-box">
+
+            <h2>Create Account</h2>
+
+            <p>Register as a Blood Donor</p>
+
+            <form action="dashboard.html">
+
+                <div class="row">
+
+                    <div class="input-box">
+
+                        <i class="fa-solid fa-user"></i>
+
+                        <input
+                            type="text"
+                            placeholder="Full Name"
+                            required>
+
+                    </div>
+
+                    <div class="input-box">
+
+                        <i class="fa-solid fa-cake-candles"></i>
+
+                        <input
+                            type="number"
+                            placeholder="Age"
+                            min="18"
+                            max="65"
+                            required>
+
+                    </div>
+
+                </div>
+
+
+                <div class="row">
+
+                    <div class="input-box">
+
+                        <i class="fa-solid fa-venus-mars"></i>
+
+                        <select required>
+
+                            <option value="">Gender</option>
+
+                            <option>Male</option>
+
+                            <option>Female</option>
+
+                            <option>Other</option>
+
+                        </select>
+
+                    </div>
+
+                    <div class="input-box">
+
+                        <i class="fa-solid fa-droplet"></i>
+
+                        <select required>
+
+                            <option value="">Blood Group</option>
+
+                            <option>A+</option>
+                            <option>A-</option>
+                            <option>B+</option>
+                            <option>B-</option>
+                            <option>AB+</option>
+                            <option>AB-</option>
+                            <option>O+</option>
+                            <option>O-</option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+
+                <div class="row">
+
+                    <div class="input-box">
+
+                        <i class="fa-solid fa-weight-scale"></i>
+
+                        <input
+                            type="number"
+                            placeholder="Weight (kg)"
+                            required>
+
+                    </div>
+
+                    <div class="input-box">
+
+                        <i class="fa-solid fa-phone"></i>
+
+                        <input
+                            type="tel"
+                            placeholder="Mobile Number"
+                            required>
+
+                    </div>
+
+                </div>
+
+
+                <div class="input-box">
+
+                    <i class="fa-solid fa-envelope"></i>
+
+                    <input
+                        type="email"
+                        placeholder="Email Address"
+                        required>
+
+                </div>
+
+
+                <div class="input-box">
+
+                    <i class="fa-solid fa-location-dot"></i>
+
+                    <textarea
+                        rows="3"
+                        placeholder="Address"
+                        required></textarea>
+
+                </div>
+
+
+                <div class="input-box">
+
+                    <label>Last Blood Donation Date</label>
+
+                    <input
+                        type="date">
+
+                </div>
+
+
+                <div class="row">
+
+                    <div class="input-box">
+
+                        <i class="fa-solid fa-lock"></i>
+
+                        <input
+                            type="password"
+                            placeholder="Password"
+                            required>
+
+                    </div>
+
+                    <div class="input-box">
+
+                        <i class="fa-solid fa-lock"></i>
+
+                        <input
+                            type="password"
+                            placeholder="Confirm Password"
+                            required>
+
+                    </div>
+
+                </div>
+
+
+                <button type="submit">
+
+                    Register
+
+                </button>
+
+
+                <p class="login-text">
+
+                    Already have an account?
+
+                    <a href="login.html">
+
+                        Login Here
+
+                    </a>
+
+                </p>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script src="js/script.js"></script>
+
+</body>
+</html>

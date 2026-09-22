@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LifeLink | Admin Dashboard</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/admin.css" />
+
+    <!-- Google Font -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    />
+  </head>
+
+  <body>
+    <div class="container">
+      <!-- Sidebar -->
+
+      <aside class="sidebar">
+        <div class="logo">
+          <i class="fa-solid fa-droplet"></i>
+          <h2>LifeLink</h2>
+        </div>
+
+        <ul>
+          <li>
+            <a href="admin.html" class="active"
+              ><i class="fa-solid fa-gauge"></i> Dashboard</a
+            >
+          </li>
+          <li>
+            <a href="#"><i class="fa-solid fa-users"></i> Manage Donors</a>
+          </li>
+          <li>
+            <a href="#"><i class="fa-solid fa-droplet"></i> Blood Stock</a>
+          </li>
+          <li>
+            <a href="#"
+              ><i class="fa-solid fa-hand-holding-droplet"></i> Blood
+              Requests</a
+            >
+          </li>
+          <li>
+            <a href="#"><i class="fa-solid fa-hospital"></i> Hospitals</a>
+          </li>
+          <li>
+            <a href="#"><i class="fa-solid fa-chart-column"></i> Reports</a>
+          </li>
+          <li>
+            <a href="login.html"
+              ><i class="fa-solid fa-right-from-bracket"></i> Logout</a
+            >
+          </li>
+        </ul>
+      </aside>
+
+      <!-- Main Content -->
+
+      <main class="main-content">
+        <header class="topbar">
+          <h2>Admin Dashboard</h2>
+
+          <div class="admin-profile">
+            <img src="images/admin.png" alt="Admin" />
+
+            <span>Administrator</span>
+          </div>
+        </header>
+
+        <!-- Dashboard Cards -->
+
+        <section class="dashboard-cards">
+          <div class="card">
+            <i class="fa-solid fa-users"></i>
+
+            <h2>1,250</h2>
+
+            <p>Total Donors</p>
+          </div>
+
+          <div class="card">
+            <i class="fa-solid fa-droplet"></i>
+
+            <h2>845</h2>
+
+            <p>Blood Units</p>
+          </div>
+
+          <div class="card">
+            <i class="fa-solid fa-hand-holding-droplet"></i>
+
+            <h2>67</h2>
+
+            <p>Pending Requests</p>
+          </div>
+
+          <div class="card">
+            <i class="fa-solid fa-hospital"></i>
+
+            <h2>42</h2>
+
+            <p>Hospitals</p>
+          </div>
+        </section>
+
+        <!-- Blood Stock -->
+
+        <section class="blood-stock">
+          <h2>Blood Stock Status</h2>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Blood Group</th>
+
+                <th>Available Units</th>
+
+                <th>Status</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr>
+                <td>A+</td>
+                <td>120</td>
+                <td>Available</td>
+              </tr>
+
+              <tr>
+                <td>B+</td>
+                <td>95</td>
+                <td>Available</td>
+              </tr>
+
+              <tr>
+                <td>O+</td>
+                <td>180</td>
+                <td>Available</td>
+              </tr>
+
+              <tr>
+                <td>AB+</td>
+                <td>25</td>
+                <td>Low Stock</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <!-- Recent Blood Requests -->
+
+        <section class="requests">
+          <h2>Recent Blood Requests</h2>
+
+          <p
+            style="
+              font-size: 13px;
+              color: #666;
+              margin-bottom: 15px;
+              margin-top: -10px;
+            "
+          >
+            Auto-refreshing from submissions
+          </p>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Patient</th>
+
+                <th>Blood Group</th>
+
+                <th>Hospital</th>
+
+                <th>Status</th>
+              </tr>
+            </thead>
+
+            <tbody id="requestsTableBody"></tbody>
+          </table>
+        </section>
+
+        <!-- Recent Donors -->
+
+        <section class="recent-donors">
+          <h2>Recent Donors</h2>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Name</th>
+
+                <th>Blood Group</th>
+
+                <th>City</th>
+
+                <th>Last Donation</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr>
+                <td>Nisha</td>
+
+                <td>O+</td>
+
+                <td>Chennai</td>
+
+                <td>15 Mar 2026</td>
+              </tr>
+
+              <tr>
+                <td>Arjun</td>
+
+                <td>A+</td>
+
+                <td>Coimbatore</td>
+
+                <td>22 Apr 2026</td>
+              </tr>
+
+              <tr>
+                <td>Priya</td>
+
+                <td>B+</td>
+
+                <td>Madurai</td>
+
+                <td>18 May 2026</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <!-- Notifications -->
+
+        <section class="notifications">
+          <h2>System Notifications</h2>
+
+          <ul>
+            <li>🚨 AB+ blood stock is running low.</li>
+
+            <li>🩸 12 new donors registered today.</li>
+
+            <li>🏥 5 hospitals submitted blood requests.</li>
+
+            <li>✅ 18 blood requests were successfully completed.</li>
+          </ul>
+        </section>
+      </main>
+    </div>
+
+    <script src="js/script.js"></script>
+
+    <script>
+      // Load and display blood requests from localStorage
+      function loadBloodRequests() {
+        const requests =
+          JSON.parse(localStorage.getItem("bloodRequests")) || [];
+        const tbody = document.getElementById("requestsTableBody");
+
+        tbody.innerHTML = "";
+
+        if (requests.length === 0) {
+          tbody.innerHTML =
+            '<tr><td colspan="4" style="text-align: center; color: #999;">No requests yet</td></tr>';
+          return;
+        }
+
+        requests.forEach((request) => {
+          const row = document.createElement("tr");
+          row.innerHTML = `
+        <td>${request.patient}</td>
+        <td>${request.bloodGroup}</td>
+        <td>${request.hospital}</td>
+        <td>${request.status}</td>
+      `;
+          tbody.appendChild(row);
+        });
+      }
+
+      // Load requests when page loads
+      window.addEventListener("load", loadBloodRequests);
+
+      // Refresh requests every 2 seconds to see new submissions
+      setInterval(loadBloodRequests, 2000);
+    </script>
+  </body>
+</html>

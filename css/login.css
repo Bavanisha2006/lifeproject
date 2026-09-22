@@ -1,0 +1,388 @@
+/* ==========================
+GOOGLE FONT & RESET
+========================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+
+    background:#f4f7fc;
+
+}
+
+/* ==========================
+CONTAINER
+========================== */
+
+.container{
+
+    width:100%;
+    min-height:100vh;
+
+    display:flex;
+
+}
+
+/* ==========================
+LEFT PANEL
+========================== */
+
+.left-panel{
+
+    flex:1;
+
+    background:linear-gradient(135deg,#e63946,#b5171e);
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    color:white;
+
+    padding:50px;
+
+}
+
+.content{
+
+    text-align:center;
+
+}
+
+.content h1{
+
+    font-size:40px;
+    margin-bottom:20px;
+
+}
+
+.content h2{
+
+    font-size:30px;
+    margin-bottom:20px;
+
+}
+
+.content p{
+
+    line-height:1.8;
+    margin-bottom:35px;
+
+}
+
+.content img{
+
+    width:85%;
+    max-width:380px;
+
+}
+
+/* ==========================
+RIGHT PANEL
+========================== */
+
+.right-panel{
+
+    flex:1;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    background:#ffffff;
+
+    padding:40px;
+
+}
+
+.login-box{
+
+    width:100%;
+    max-width:450px;
+
+    background:#fff;
+
+    padding:40px;
+
+    border-radius:15px;
+
+    box-shadow:0 10px 30px rgba(0,0,0,.1);
+
+}
+
+.login-box h2{
+
+    text-align:center;
+    color:#e63946;
+    margin-bottom:10px;
+
+}
+
+.login-box p{
+
+    text-align:center;
+    color:#777;
+    margin-bottom:25px;
+
+}
+
+/* ==========================
+INPUT BOX
+========================== */
+
+.input-box{
+
+    position:relative;
+
+    margin-bottom:20px;
+
+}
+
+.input-box i:first-child{
+
+    position:absolute;
+
+    left:15px;
+    top:50%;
+
+    transform:translateY(-50%);
+
+    color:#e63946;
+
+}
+
+.input-box input,
+.input-box select{
+
+    width:100%;
+
+    padding:14px 45px;
+
+    border:1px solid #ddd;
+
+    border-radius:10px;
+
+    outline:none;
+
+    font-size:15px;
+
+}
+
+.input-box input:focus,
+.input-box select:focus{
+
+    border-color:#e63946;
+
+}
+
+.toggle-password{
+
+    position:absolute;
+
+    right:15px;
+    top:50%;
+
+    transform:translateY(-50%);
+
+    cursor:pointer;
+
+    color:#888;
+
+}
+
+/* ==========================
+OPTIONS
+========================== */
+
+.options{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:25px;
+
+    font-size:14px;
+
+}
+
+.options a{
+
+    text-decoration:none;
+
+    color:#e63946;
+
+}
+
+.options a:hover{
+
+    text-decoration:underline;
+
+}
+
+/* ==========================
+BUTTON
+========================== */
+
+button{
+
+    width:100%;
+
+    padding:14px;
+
+    background:#e63946;
+
+    color:white;
+
+    border:none;
+
+    border-radius:10px;
+
+    font-size:16px;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+button:hover{
+
+    background:#b5171e;
+
+}
+
+/* ==========================
+DIVIDER
+========================== */
+
+.divider{
+
+    text-align:center;
+
+    margin:25px 0;
+
+    color:#888;
+
+    position:relative;
+
+}
+
+.divider::before{
+
+    content:"";
+
+    position:absolute;
+
+    left:0;
+    top:50%;
+
+    width:40%;
+
+    height:1px;
+
+    background:#ccc;
+
+}
+
+.divider::after{
+
+    content:"";
+
+    position:absolute;
+
+    right:0;
+    top:50%;
+
+    width:40%;
+
+    height:1px;
+
+    background:#ccc;
+
+}
+
+/* ==========================
+REGISTER
+========================== */
+
+.register-text{
+
+    text-align:center;
+
+    margin-top:20px;
+
+}
+
+.register-text a{
+
+    color:#e63946;
+
+    text-decoration:none;
+
+    font-weight:600;
+
+}
+
+.register-text a:hover{
+
+    text-decoration:underline;
+
+}
+
+/* ==========================
+RESPONSIVE
+========================== */
+
+@media(max-width:900px){
+
+.container{
+
+    flex-direction:column;
+
+}
+
+.left-panel{
+
+    display:none;
+
+}
+
+.right-panel{
+
+    padding:20px;
+
+}
+
+.login-box{
+
+    padding:30px;
+
+}
+
+}
+
+@media(max-width:500px){
+
+.login-box{
+
+    padding:20px;
+
+}
+
+.options{
+
+    flex-direction:column;
+    gap:10px;
+    align-items:flex-start;
+
+}
+
+}

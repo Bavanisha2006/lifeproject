@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LifeLink | Donor Dashboard</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/dashboard.css">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+</head>
+
+<body>
+
+<div class="dashboard-container">
+
+    <!-- Sidebar -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+            <i class="fa-solid fa-droplet"></i>
+            <h2>LifeLink</h2>
+        </div>
+
+        <ul>
+
+            <li><a href="dashboard.html"><i class="fa-solid fa-house"></i> Dashboard</a></li>
+
+            <li><a href="profile.html"><i class="fa-solid fa-user"></i> Profile</a></li>
+
+            <li><a href="search.html"><i class="fa-solid fa-magnifying-glass"></i> Search Blood</a></li>
+
+            <li><a href="request.html"><i class="fa-solid fa-hand-holding-droplet"></i> Request Blood</a></li>
+
+            <li><a href="#"><i class="fa-solid fa-clock-rotate-left"></i> Donation History</a></li>
+
+            <li><a href="#"><i class="fa-solid fa-award"></i> Badges</a></li>
+
+            <li><a href="login.html"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></li>
+
+        </ul>
+
+    </aside>
+
+
+
+    <!-- Main Content -->
+
+    <main class="main-content">
+
+        <!-- Top Bar -->
+
+        <header class="topbar">
+
+            <h2>Welcome, Nisha 👋</h2>
+
+            <div class="profile">
+
+                <img src="images/profile.png" alt="Profile">
+
+            </div>
+
+        </header>
+
+
+
+        <!-- Dashboard Cards -->
+
+        <section class="cards">
+
+            <div class="card">
+
+                <i class="fa-solid fa-droplet"></i>
+
+                <h3>Blood Group</h3>
+
+                <h2>O+</h2>
+
+            </div>
+
+            <div class="card">
+
+                <i class="fa-solid fa-calendar-check"></i>
+
+                <h3>Next Eligible Donation</h3>
+
+                <h2>12 Oct 2026</h2>
+
+            </div>
+
+            <div class="card">
+
+                <i class="fa-solid fa-medal"></i>
+
+                <h3>Badge</h3>
+
+                <h2>Silver Donor</h2>
+
+            </div>
+
+            <div class="card">
+
+                <i class="fa-solid fa-heart"></i>
+
+                <h3>Lives Saved</h3>
+
+                <h2>09</h2>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- Quick Actions -->
+
+        <section class="quick-actions">
+
+            <h2>Quick Actions</h2>
+
+            <div class="action-container">
+
+                <a href="request.html" class="action-card">
+
+                    <i class="fa-solid fa-hand-holding-droplet"></i>
+
+                    <p>Request Blood</p>
+
+                </a>
+
+                <a href="search.html" class="action-card">
+
+                    <i class="fa-solid fa-magnifying-glass"></i>
+
+                    <p>Search Blood</p>
+
+                </a>
+
+                <a href="profile.html" class="action-card">
+
+                    <i class="fa-solid fa-user-pen"></i>
+
+                    <p>Edit Profile</p>
+
+                </a>
+
+                <a href="#" class="action-card">
+
+                    <i class="fa-solid fa-download"></i>
+
+                    <p>Download Certificate</p>
+
+                </a>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- Donation History -->
+
+        <section class="history">
+
+            <h2>Recent Donations</h2>
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>Date</th>
+
+                        <th>Hospital</th>
+
+                        <th>Blood Group</th>
+
+                        <th>Status</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    <tr>
+
+                        <td>15 Mar 2026</td>
+
+                        <td>Apollo Hospital</td>
+
+                        <td>O+</td>
+
+                        <td>Completed</td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td>08 Dec 2025</td>
+
+                        <td>GH Chennai</td>
+
+                        <td>O+</td>
+
+                        <td>Completed</td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td>02 Aug 2025</td>
+
+                        <td>CMC Hospital</td>
+
+                        <td>O+</td>
+
+                        <td>Completed</td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </section>
+
+
+
+        <!-- Notifications -->
+
+        <section class="notifications">
+
+            <h2>Notifications</h2>
+
+            <ul>
+
+                <li>🩸 Blood donation camp on 25 July 2026.</li>
+
+                <li>❤️ You are eligible to donate after 12 Oct 2026.</li>
+
+                <li>🏆 Congratulations! You earned the Silver Donor Badge.</li>
+
+                <li>📢 Emergency O+ blood request received nearby.</li>
+
+            </ul>
+
+        </section>
+
+    </main>
+
+</div>
+<button onclick="toggleMode()">
+🌙 Dark Mode
+</button>
+
+<script src="js/script.js"></script>
+
+</body>
+</html>

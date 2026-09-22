@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LifeLink | Blood Request</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/request.css" />
+
+    <!-- Google Font -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    />
+  </head>
+
+  <body>
+    <div class="container">
+      <!-- Sidebar -->
+
+      <aside class="sidebar">
+        <div class="logo">
+          <i class="fa-solid fa-droplet"></i>
+          <h2>LifeLink</h2>
+        </div>
+
+        <ul>
+          <li>
+            <a href="dashboard.html"
+              ><i class="fa-solid fa-house"></i> Dashboard</a
+            >
+          </li>
+          <li>
+            <a href="profile.html"><i class="fa-solid fa-user"></i> Profile</a>
+          </li>
+          <li>
+            <a href="search.html"
+              ><i class="fa-solid fa-magnifying-glass"></i> Search Blood</a
+            >
+          </li>
+          <li>
+            <a href="request.html" class="active"
+              ><i class="fa-solid fa-hand-holding-droplet"></i> Request Blood</a
+            >
+          </li>
+          <li>
+            <a href="admin.html"
+              ><i class="fa-solid fa-user-shield"></i> Admin</a
+            >
+          </li>
+          <li>
+            <a href="login.html"
+              ><i class="fa-solid fa-right-from-bracket"></i> Logout</a
+            >
+          </li>
+        </ul>
+      </aside>
+
+      <!-- Main Content -->
+
+      <main class="main-content">
+        <header class="topbar">
+          <h2>Blood Request Form</h2>
+        </header>
+
+        <section class="request-form">
+          <form action="#">
+            <div class="row">
+              <div class="input-box">
+                <label>Patient Name</label>
+
+                <input type="text" placeholder="Enter Patient Name" required />
+              </div>
+
+              <div class="input-box">
+                <label>Age</label>
+
+                <input type="number" placeholder="Age" required />
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="input-box">
+                <label>Gender</label>
+
+                <select required>
+                  <option value="">Select Gender</option>
+
+                  <option>Male</option>
+
+                  <option>Female</option>
+
+                  <option>Other</option>
+                </select>
+              </div>
+
+              <div class="input-box">
+                <label>Blood Group</label>
+
+                <select required>
+                  <option value="">Select Blood Group</option>
+
+                  <option>A+</option>
+                  <option>A-</option>
+                  <option>B+</option>
+                  <option>B-</option>
+                  <option>AB+</option>
+                  <option>AB-</option>
+                  <option>O+</option>
+                  <option>O-</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="input-box">
+                <label>Units Required</label>
+
+                <input
+                  type="number"
+                  min="1"
+                  placeholder="Number of Units"
+                  required
+                />
+              </div>
+
+              <div class="input-box">
+                <label>Required Date</label>
+
+                <input type="date" required />
+              </div>
+            </div>
+
+            <div class="input-box">
+              <label>Hospital Name</label>
+
+              <input type="text" placeholder="Enter Hospital Name" required />
+            </div>
+
+            <div class="row">
+              <div class="input-box">
+                <label>City</label>
+
+                <input type="text" placeholder="Enter City" required />
+              </div>
+
+              <div class="input-box">
+                <label>Contact Number</label>
+
+                <input type="tel" placeholder="Mobile Number" required />
+              </div>
+            </div>
+
+            <div class="input-box">
+              <label>Emergency Level</label>
+
+              <select required>
+                <option value="">Select Priority</option>
+
+                <option>Normal</option>
+
+                <option>Urgent</option>
+
+                <option>Critical</option>
+              </select>
+            </div>
+
+            <div class="input-box">
+              <label>Additional Notes</label>
+
+              <textarea
+                rows="5"
+                placeholder="Enter additional information..."
+              ></textarea>
+            </div>
+
+            <button type="submit">
+              <i class="fa-solid fa-paper-plane"></i>
+
+              Submit Blood Request
+            </button>
+
+            <div id="successMessage" class="success-message">
+              ✓ Request Submitted successfully
+            </div>
+          </form>
+        </section>
+
+        <!-- Information Cards -->
+
+        <section class="info-cards">
+          <div class="info-card">
+            <i class="fa-solid fa-circle-info"></i>
+
+            <h3>Request Status</h3>
+
+            <p>Pending Verification</p>
+          </div>
+
+          <div class="info-card">
+            <i class="fa-solid fa-clock"></i>
+
+            <h3>Average Response</h3>
+
+            <p>Within 30 Minutes</p>
+          </div>
+
+          <div class="info-card">
+            <i class="fa-solid fa-phone-volume"></i>
+
+            <h3>Emergency Helpline</h3>
+
+            <p>1800-000-111</p>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="js/script.js"></script>
+
+    <script>
+      document
+        .querySelector(".request-form form")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+
+          // Collect form data
+          const patientName =
+            document.querySelectorAll(".input-box input")[0].value;
+          const bloodGroup =
+            document.querySelectorAll(".input-box select")[1].value;
+          const hospitalName =
+            document.querySelectorAll(".input-box input")[4].value;
+          const requiredDate =
+            document.querySelectorAll(".input-box input")[3].value;
+          const emergencyLevel =
+            document.querySelectorAll(".input-box select")[2].value;
+          const status = "Pending";
+
+          // Create request object
+          const newRequest = {
+            patient: patientName,
+            bloodGroup: bloodGroup,
+            hospital: hospitalName,
+            date: requiredDate,
+            status: status,
+            priority: emergencyLevel,
+            timestamp: new Date().toLocaleString(),
+          };
+
+          // Get existing requests from localStorage
+          let requests =
+            JSON.parse(localStorage.getItem("bloodRequests")) || [];
+
+          // Add new request
+          requests.push(newRequest);
+
+          // Save to localStorage
+          localStorage.setItem("bloodRequests", JSON.stringify(requests));
+
+          // Show success message
+          const successMessage = document.getElementById("successMessage");
+          successMessage.style.display = "block";
+
+          // Clear form fields
+          this.reset();
+
+          // Hide message after 5 seconds
+          setTimeout(function () {
+            successMessage.style.display = "none";
+          }, 5000);
+        });
+    </script>
+  </body>
+</html>
