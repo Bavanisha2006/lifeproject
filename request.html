@@ -74,13 +74,19 @@
           <form action="#">
             <div class="row">
               <div class="input-box">
-                <label>Patient Name</label>
+                <label
+                  >Patient Name
+                  <span class="required-mark" aria-hidden="true">*</span></label
+                >
 
                 <input type="text" placeholder="Enter Patient Name" required />
               </div>
 
               <div class="input-box">
-                <label>Age</label>
+                <label
+                  >Age
+                  <span class="required-mark" aria-hidden="true">*</span></label
+                >
 
                 <input type="number" placeholder="Age" required />
               </div>
@@ -88,7 +94,10 @@
 
             <div class="row">
               <div class="input-box">
-                <label>Gender</label>
+                <label
+                  >Gender
+                  <span class="required-mark" aria-hidden="true">*</span></label
+                >
 
                 <select required>
                   <option value="">Select Gender</option>
@@ -102,7 +111,10 @@
               </div>
 
               <div class="input-box">
-                <label>Blood Group</label>
+                <label
+                  >Blood Group
+                  <span class="required-mark" aria-hidden="true">*</span></label
+                >
 
                 <select required>
                   <option value="">Select Blood Group</option>
@@ -121,7 +133,10 @@
 
             <div class="row">
               <div class="input-box">
-                <label>Units Required</label>
+                <label
+                  >Units Required
+                  <span class="required-mark" aria-hidden="true">*</span></label
+                >
 
                 <input
                   type="number"
@@ -132,34 +147,95 @@
               </div>
 
               <div class="input-box">
-                <label>Required Date</label>
+                <label
+                  >Required Date
+                  <span class="required-mark" aria-hidden="true">*</span></label
+                >
 
-                <input type="date" required />
+                <input type="date" id="requiredDate" required />
               </div>
             </div>
 
             <div class="input-box">
-              <label>Hospital Name</label>
+              <label
+                >Hospital Name
+                <span class="required-mark" aria-hidden="true">*</span></label
+              >
 
-              <input type="text" placeholder="Enter Hospital Name" required />
+              <input
+                type="text"
+                list="coimbatoreHospitals"
+                placeholder="Select or enter Hospital Name"
+                required
+              />
+              <datalist id="coimbatoreHospitals">
+                <option value="Coimbatore Medical College Hospital"></option>
+                <option value="Government Hospital, Coimbatore"></option>
+                <option
+                  value="Kovai Medical Center and Hospital (KMCH)"
+                ></option>
+                <option value="PSG Hospitals"></option>
+                <option value="KG Hospital"></option>
+                <option value="Ganga Hospital"></option>
+                <option value="Sri Ramakrishna Hospital"></option>
+                <option value="Royal Care Hospital"></option>
+                <option value="Aravind Eye Hospital, Coimbatore"></option>
+              </datalist>
             </div>
 
             <div class="row">
               <div class="input-box">
-                <label>City</label>
+                <label
+                  >City
+                  <span class="required-mark" aria-hidden="true">*</span></label
+                >
 
-                <input type="text" placeholder="Enter City" required />
+                <input
+                  type="text"
+                  list="tamilNaduLocations"
+                  placeholder="Select or enter City"
+                  required
+                />
+                <datalist id="tamilNaduLocations">
+                  <option value="Chennai"></option>
+                  <option value="Coimbatore"></option>
+                  <option value="Madurai"></option>
+                  <option value="Tiruchirappalli"></option>
+                  <option value="Salem"></option>
+                  <option value="Tiruppur"></option>
+                  <option value="Erode"></option>
+                  <option value="Thoothukudi"></option>
+                  <option value="Tirunelveli"></option>
+                  <option value="Vellore"></option>
+                  <option value="Thanjavur"></option>
+                  <option value="Dindigul"></option>
+                  <option value="Hosur"></option>
+                  <option value="Nagercoil"></option>
+                </datalist>
               </div>
 
               <div class="input-box">
-                <label>Contact Number</label>
+                <label
+                  >Contact Number
+                  <span class="required-mark" aria-hidden="true">*</span></label
+                >
 
-                <input type="tel" placeholder="Mobile Number" required />
+                <input
+                  type="tel"
+                  placeholder="10-digit Mobile Number"
+                  inputmode="numeric"
+                  pattern="[6-9][0-9]{9}"
+                  maxlength="10"
+                  required
+                />
               </div>
             </div>
 
             <div class="input-box">
-              <label>Emergency Level</label>
+              <label
+                >Emergency Level
+                <span class="required-mark" aria-hidden="true">*</span></label
+              >
 
               <select required>
                 <option value="">Select Priority</option>
@@ -271,12 +347,26 @@
 
           // Clear form fields
           this.reset();
+          setMinimumRequiredDate();
 
           // Hide message after 5 seconds
           setTimeout(function () {
             successMessage.style.display = "none";
           }, 5000);
         });
+    </script>
+    <script>
+      function setMinimumRequiredDate() {
+        const today = new Date();
+        const localDate = new Date(
+          today.getTime() - today.getTimezoneOffset() * 60000,
+        )
+          .toISOString()
+          .split("T")[0];
+        document.getElementById("requiredDate").min = localDate;
+      }
+
+      setMinimumRequiredDate();
     </script>
   </body>
 </html>

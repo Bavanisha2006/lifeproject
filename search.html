@@ -1,261 +1,224 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>LifeLink | Search Blood</title>
 
     <!-- CSS -->
-    <link rel="stylesheet" href="css/search.css">
+    <link rel="stylesheet" href="css/search.css" />
 
     <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
 
     <!-- Font Awesome -->
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-</head>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    />
+  </head>
 
-<body>
+  <body>
+    <div class="container">
+      <!-- Sidebar -->
 
-<div class="container">
-
-    <!-- Sidebar -->
-
-    <aside class="sidebar">
-
+      <aside class="sidebar">
         <div class="logo">
-            <i class="fa-solid fa-droplet"></i>
-            <h2>LifeLink</h2>
+          <i class="fa-solid fa-droplet"></i>
+          <h2>LifeLink</h2>
         </div>
 
         <ul>
-            <li><a href="dashboard.html"><i class="fa-solid fa-house"></i> Dashboard</a></li>
-            <li><a href="profile.html"><i class="fa-solid fa-user"></i> Profile</a></li>
-            <li><a href="search.html" class="active"><i class="fa-solid fa-magnifying-glass"></i> Search Blood</a></li>
-            <li><a href="request.html"><i class="fa-solid fa-hand-holding-droplet"></i> Request Blood</a></li>
-            <li><a href="admin.html"><i class="fa-solid fa-user-shield"></i> Admin</a></li>
-            <li><a href="login.html"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></li>
+          <li>
+            <a href="dashboard.html"
+              ><i class="fa-solid fa-house"></i> Dashboard</a
+            >
+          </li>
+          <li>
+            <a href="profile.html"><i class="fa-solid fa-user"></i> Profile</a>
+          </li>
+          <li>
+            <a href="search.html" class="active"
+              ><i class="fa-solid fa-magnifying-glass"></i> Search Blood</a
+            >
+          </li>
+          <li>
+            <a href="request.html"
+              ><i class="fa-solid fa-hand-holding-droplet"></i> Request Blood</a
+            >
+          </li>
+          <li>
+            <a href="admin.html"
+              ><i class="fa-solid fa-user-shield"></i> Admin</a
+            >
+          </li>
+          <li>
+            <a href="login.html"
+              ><i class="fa-solid fa-right-from-bracket"></i> Logout</a
+            >
+          </li>
         </ul>
+      </aside>
 
-    </aside>
+      <!-- Main Content -->
 
-
-
-    <!-- Main Content -->
-
-    <main class="main-content">
-
+      <main class="main-content">
         <header class="topbar">
-
-            <h2>Search Blood Availability</h2>
-
+          <h2>Search Blood Availability</h2>
         </header>
-
-
 
         <!-- Search Form -->
 
         <section class="search-box">
+          <h3>Find Available Blood</h3>
 
-            <h3>Find Available Blood</h3>
+          <form>
+            <div class="form-group">
+              <label>Blood Group</label>
 
-            <form>
+              <select required>
+                <option value="">Select Blood Group</option>
 
-                <div class="form-group">
+                <option>A+</option>
+                <option>A-</option>
+                <option>B+</option>
+                <option>B-</option>
+                <option>AB+</option>
+                <option>AB-</option>
+                <option>O+</option>
+                <option>O-</option>
+              </select>
+            </div>
 
-                    <label>Blood Group</label>
+            <div class="form-group">
+              <label>City</label>
 
-                    <select required>
+              <input type="text" placeholder="Enter City" />
+            </div>
 
-                        <option value="">Select Blood Group</option>
+            <button type="submit">
+              <i class="fa-solid fa-magnifying-glass"></i>
 
-                        <option>A+</option>
-                        <option>A-</option>
-                        <option>B+</option>
-                        <option>B-</option>
-                        <option>AB+</option>
-                        <option>AB-</option>
-                        <option>O+</option>
-                        <option>O-</option>
-
-                    </select>
-
-                </div>
-
-                <div class="form-group">
-
-                    <label>City</label>
-
-                    <input
-                        type="text"
-                        placeholder="Enter City">
-
-                </div>
-
-                <button type="submit">
-
-                    <i class="fa-solid fa-magnifying-glass"></i>
-
-                    Search
-
-                </button>
-
-            </form>
-
+              Search
+            </button>
+          </form>
         </section>
-
-
 
         <!-- Search Results -->
 
         <section class="results">
+          <h3>Available Blood Banks</h3>
 
-            <h3>Available Blood Banks</h3>
+          <div class="card-container">
+            <div class="blood-card">
+              <h3>Apollo Hospital</h3>
 
-            <div class="card-container">
+              <p><strong>Blood Group:</strong> O+</p>
 
-                <div class="blood-card">
+              <p><strong>Units:</strong> 18</p>
 
-                    <h3>Apollo Hospital</h3>
+              <p><strong>Location:</strong> Chennai</p>
 
-                    <p><strong>Blood Group:</strong> O+</p>
+              <span class="available"> Available </span>
 
-                    <p><strong>Units:</strong> 18</p>
-
-                    <p><strong>Location:</strong> Chennai</p>
-
-                    <span class="available">
-                        Available
-                    </span>
-
-                    <button>View Details</button>
-
-                </div>
-
-                <div class="blood-card">
-
-                    <h3>Government Hospital</h3>
-
-                    <p><strong>Blood Group:</strong> O+</p>
-
-                    <p><strong>Units:</strong> 12</p>
-
-                    <p><strong>Location:</strong> Chennai</p>
-
-                    <span class="available">
-                        Available
-                    </span>
-
-                    <button>Contact</button>
-
-                </div>
-
-                <div class="blood-card">
-
-                    <h3>CMC Hospital</h3>
-
-                    <p><strong>Blood Group:</strong> O+</p>
-
-                    <p><strong>Units:</strong> 8</p>
-
-                    <p><strong>Location:</strong> Vellore</p>
-
-                    <span class="limited">
-                        Limited Stock
-                    </span>
-
-                    <button>Contact</button>
-
-                </div>
-
+              <button>View Details</button>
             </div>
 
+            <div class="blood-card">
+              <h3>Government Hospital</h3>
+
+              <p><strong>Blood Group:</strong> O+</p>
+
+              <p><strong>Units:</strong> 12</p>
+
+              <p><strong>Location:</strong> Chennai</p>
+
+              <span class="available"> Available </span>
+
+              <button>Contact</button>
+            </div>
+
+            <div class="blood-card">
+              <h3>CMC Hospital</h3>
+
+              <p><strong>Blood Group:</strong> O+</p>
+
+              <p><strong>Units:</strong> 8</p>
+
+              <p><strong>Location:</strong> Vellore</p>
+
+              <span class="limited"> Limited Stock </span>
+
+              <button>Contact</button>
+            </div>
+          </div>
         </section>
-
-
 
         <!-- Donor List -->
 
         <section class="donors">
+          <h3>Nearby Donors</h3>
 
-            <h3>Nearby Donors</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Name</th>
 
-            <table>
+                <th>Blood Group</th>
 
-                <thead>
+                <th>City</th>
 
-                    <tr>
+                <th>Status</th>
 
-                        <th>Name</th>
+                <th>Action</th>
+              </tr>
+            </thead>
 
-                        <th>Blood Group</th>
+            <tbody>
+              <tr>
+                <td>Arun Kumar</td>
 
-                        <th>City</th>
+                <td>O+</td>
 
-                        <th>Status</th>
+                <td>Chennai</td>
 
-                        <th>Action</th>
+                <td>Eligible</td>
 
-                    </tr>
+                <td><button>Contact</button></td>
+              </tr>
 
-                </thead>
+              <tr>
+                <td>Priya</td>
 
-                <tbody>
+                <td>O+</td>
 
-                    <tr>
+                <td>Tambaram</td>
 
-                        <td>Arun Kumar</td>
+                <td>Eligible</td>
 
-                        <td>O+</td>
+                <td><button>Contact</button></td>
+              </tr>
 
-                        <td>Chennai</td>
+              <tr>
+                <td>Rahul</td>
 
-                        <td>Eligible</td>
+                <td>O+</td>
 
-                        <td><button>Contact</button></td>
+                <td>Velachery</td>
 
-                    </tr>
+                <td>Eligible</td>
 
-                    <tr>
-
-                        <td>Priya</td>
-
-                        <td>O+</td>
-
-                        <td>Tambaram</td>
-
-                        <td>Eligible</td>
-
-                        <td><button>Contact</button></td>
-
-                    </tr>
-
-                    <tr>
-
-                        <td>Rahul</td>
-
-                        <td>O+</td>
-
-                        <td>Velachery</td>
-
-                        <td>Eligible</td>
-
-                        <td><button>Contact</button></td>
-
-                    </tr>
-
-                </tbody>
-
-            </table>
-
+                <td><button>Contact</button></td>
+              </tr>
+            </tbody>
+          </table>
         </section>
+      </main>
+    </div>
 
-    </main>
-
-</div>
-
-<script src="js/search.js"></script>
-
-</body>
+    <script src="js/search.js"></script>
+  </body>
 </html>

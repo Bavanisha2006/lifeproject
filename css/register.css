@@ -52,6 +52,19 @@ LEFT PANEL
 
 }
 
+.content .donor-image{
+
+    display:block;
+    width:min(100%, 360px);
+    max-width:100%;
+    height:auto;
+    padding:8px;
+    border:3px solid rgba(255,255,255,.85);
+    border-radius:14px;
+    margin:0 auto 20px;
+
+}
+
 .content h1{
 
     font-size:42px;
@@ -339,5 +352,61 @@ RESPONSIVE
     font-size:24px;
 
 }
+
+}
+
+.password-toggle{
+
+    position:absolute;
+    right:15px;
+    top:50%;
+    width:auto;
+    margin:0;
+    padding:0;
+    background:transparent;
+    color:#E63946;
+    transform:translateY(-50%);
+
+}
+
+.password-toggle:hover{
+
+    background:transparent;
+
+}
+
+.password-toggle i{
+
+    position:static;
+    transform:none;
+
+}
+
+.input-box input[type="password"]{
+
+    padding-right:45px;
+
+}
+
+.field-message{
+
+    display:block;
+    min-height:18px;
+    margin-top:5px;
+    color:#c81d25;
+    font-size:12px;
+
+}
+
+.password-requirements{
+
+    color:#777;
+
+}
+
+.password-field > i:first-child,
+.password-field .password-toggle{
+
+    top:22px;
 
 }

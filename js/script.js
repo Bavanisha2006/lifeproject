@@ -1,5 +1,237 @@
 // Blood Donation System JavaScript
 
+document.addEventListener("DOMContentLoaded", function(){
+    const protectedPages = ["dashboard.html", "profile.html", "search.html", "request.html", "admin.html"];
+    const currentPage = window.location.pathname.split("/").pop().toLowerCase();
+
+    if(!protectedPages.includes(currentPage)){
+        return;
+    }
+
+    let registeredUser = null;
+    try {
+        registeredUser = JSON.parse(localStorage.getItem("userData") || "null");
+    } catch (error) {
+        registeredUser = null;
+    }
+
+    if(!registeredUser || !registeredUser.email){
+        alert("Please register on the website before accessing the portal.");
+        window.location.replace("register.html");
+    }
+});
+
+
+// Registration validation and password visibility
+
+document.addEventListener("DOMContentLoaded", function(){
+
+    const form = document.getElementById("registerForm");
+
+    if(!form){
+        return;
+    }
+
+    const name = document.getElementById("registerName");
+    const role = document.getElementById("registerRole");
+    const email = document.getElementById("registerEmail");
+    const mobile = document.getElementById("mobileNumber");
+    const donationDate = document.querySelector("#registerForm input[type='date']");
+    const password = document.getElementById("registerPassword");
+    const confirmPassword = document.getElementById("confirmPassword");
+
+    if(!name || !role || !email || !mobile || !password || !confirmPassword){
+        return;
+    }
+
+    const messages = {
+        name: document.getElementById("nameMessage"),
+        email: document.getElementById("emailMessage"),
+        mobile: document.getElementById("mobileMessage"),
+        password: document.getElementById("passwordMessage"),
+        confirmPassword: document.getElementById("confirmPasswordMessage")
+    };
+
+    if(donationDate){
+        donationDate.max = new Date().toISOString().split("T")[0];
+    }
+
+    if(messages.password){
+        messages.password.textContent = "Use at least 12 characters, including an uppercase letter, number, and special character (! @ # $ % ^ & *).";
+        messages.password.classList.add("password-requirements");
+    }
+
+    function setMessage(field, message){
+        if(messages[field]){
+            messages[field].textContent = message;
+        }
+    }
+
+    function validateName(){
+        const message = name.value.trim() ? "" : "Please enter your full name.";
+        name.setCustomValidity(message);
+        setMessage("name", message);
+        return !message;
+    }
+
+    function validateEmail(){
+        const validEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim());
+        const message = validEmail ? "" : "Please enter a valid email address, such as user@example.com.";
+        email.setCustomValidity(message);
+        setMessage("email", message);
+        return validEmail;
+    }
+
+    function validateMobile(){
+        const validMobile = /^[6-9][0-9]{9}$/.test(mobile.value);
+        const message = validMobile ? "" : "Mobile number must be exactly 10 digits and start with 6, 7, 8, or 9.";
+        mobile.setCustomValidity(message);
+        setMessage("mobile", message);
+        return validMobile;
+    }
+
+    function validatePassword(){
+        const validPassword = /^(?=.{12,}$)(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])/.test(password.value);
+        const message = validPassword ? "" : "Password must be at least 12 characters and include an uppercase letter, number, and special character.";
+        password.setCustomValidity(message);
+        setMessage("password", message || "Use at least 12 characters, including an uppercase letter, number, and special character (! @ # $ % ^ & *).");
+        return validPassword;
+    }
+
+    function validateConfirmPassword(){
+        const matches = confirmPassword.value === password.value && confirmPassword.value !== "";
+        const message = matches ? "" : "Passwords must match exactly.";
+        confirmPassword.setCustomValidity(message);
+        setMessage("confirmPassword", message);
+        return matches;
+    }
+
+    name.addEventListener("input", validateName);
+    email.addEventListener("input", validateEmail);
+    mobile.addEventListener("input", function(){
+        mobile.value = mobile.value.replace(/\D/g, "").slice(0, 10);
+        validateMobile();
+    });
+    password.addEventListener("input", function(){
+        validatePassword();
+        validateConfirmPassword();
+    });
+    confirmPassword.addEventListener("input", validateConfirmPassword);
+
+    form.addEventListener("submit", function(event){
+        const valid = validateName() && validateEmail() && validateMobile() && validatePassword() && validateConfirmPassword();
+
+        if(!valid || !form.checkValidity()){
+            event.preventDefault();
+            form.reportValidity();
+        } else {
+            localStorage.setItem("userData", JSON.stringify({
+                name: name.value.trim(),
+                role: role.value,
+                email: email.value.trim(),
+                phone: mobile.value,
+                password: password.value
+            }));
+        }
+    });
+
+    document.querySelectorAll(".password-toggle").forEach(function(toggle){
+        toggle.addEventListener("click", function(){
+            const field = document.getElementById(toggle.dataset.passwordTarget);
+            if(!field){
+                return;
+            }
+
+            const icon = toggle.querySelector("i");
+            const showing = field.type === "text";
+
+            field.type = showing ? "password" : "text";
+            toggle.setAttribute("aria-pressed", String(!showing));
+            toggle.setAttribute("aria-label", showing ? "Show password" : "Hide password");
+            if(icon){
+                icon.classList.toggle("fa-eye", showing);
+                icon.classList.toggle("fa-eye-slash", !showing);
+            }
+        });
+    });
+});
+
+document.addEventListener("DOMContentLoaded", function(){
+    const form = document.getElementById("loginForm");
+
+    if(!form){
+        return;
+    }
+
+    form.addEventListener("submit", function(event){
+        event.preventDefault();
+
+        let registeredUser = null;
+        try {
+            registeredUser = JSON.parse(localStorage.getItem("userData") || "null");
+        } catch (error) {
+            registeredUser = null;
+        }
+
+        const role = document.getElementById("loginRole").value;
+        const email = document.getElementById("loginEmail").value.trim();
+        const password = document.getElementById("password").value;
+
+        if(!form.checkValidity()){
+            form.reportValidity();
+            return;
+        }
+
+        if(!registeredUser || registeredUser.email !== email || registeredUser.role !== role){
+            alert("Please register on the portal before you login.");
+            window.location.href = "register.html";
+            return;
+        }
+
+        if(registeredUser.password !== password){
+            alert("The email or password is incorrect.");
+            return;
+        }
+
+        window.location.href = "dashboard.html";
+    });
+});
+
+document.addEventListener("DOMContentLoaded", function(){
+
+    const welcomeMessage = document.getElementById("welcomeMessage");
+
+    if(!welcomeMessage){
+        return;
+    }
+
+    try {
+        const savedUser = JSON.parse(localStorage.getItem("userData") || "null");
+        if(savedUser && savedUser.name){
+            welcomeMessage.textContent = `Welcome, ${savedUser.name} 👋`;
+        }
+    } catch (error) {
+        console.warn("Unable to read saved user data:", error);
+    }
+});
+
+
+function togglePassword(){
+    const passwordField = document.getElementById("password");
+
+    if(!passwordField){
+        return;
+    }
+
+    const isHidden = passwordField.type === "password";
+    passwordField.type = isHidden ? "text" : "password";
+
+    const toggleIcon = document.querySelector(".toggle-password");
+    if(toggleIcon){
+        toggleIcon.classList.toggle("fa-eye", !isHidden);
+        toggleIcon.classList.toggle("fa-eye-slash", isHidden);
+    }
+}
 
 // Login Function
 

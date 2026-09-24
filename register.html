@@ -1,251 +1,307 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>LifeLink | Donor Registration</title>
 
     <!-- CSS -->
-    <link rel="stylesheet" href="css/register.css">
+    <link rel="stylesheet" href="css/register.css" />
 
     <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
 
     <!-- Font Awesome -->
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-</head>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    />
+  </head>
 
-<body>
+  <body>
+    <div class="container">
+      <!-- Left Side -->
 
-<div class="container">
-
-    <!-- Left Side -->
-
-    <div class="left-panel">
-
+      <div class="left-panel">
         <div class="content">
+          <img class="donor-image" src="images/donor.png" alt="Blood donor" />
 
-            <h1><i class="fa-solid fa-droplet"></i> LifeLink</h1>
+          <h1><i class="fa-solid fa-droplet"></i> LifeLink</h1>
 
-            <h2>Become a Blood Donor</h2>
+          <h2>Become a Blood Donor</h2>
 
-            <p>
-                Your single donation can save multiple lives.
-                Join our growing community of heroes and help
-                patients in need.
-            </p>
-
-            <img src="images/register-blood.png"
-                 alt="Blood Donation">
-
+          <p>
+            Your single donation can save multiple lives. Join our growing
+            community of heroes and help patients in need.
+          </p>
         </div>
+      </div>
 
-    </div>
+      <!-- Right Side -->
 
-
-
-    <!-- Right Side -->
-
-    <div class="right-panel">
-
+      <div class="right-panel">
         <div class="register-box">
-
-            <h2>Create Account</h2>
-
-            <p>Register as a Blood Donor</p>
-
-            <form action="dashboard.html">
-
-                <div class="row">
-
-                    <div class="input-box">
-
-                        <i class="fa-solid fa-user"></i>
-
-                        <input
-                            type="text"
-                            placeholder="Full Name"
-                            required>
-
-                    </div>
-
-                    <div class="input-box">
-
-                        <i class="fa-solid fa-cake-candles"></i>
-
-                        <input
-                            type="number"
-                            placeholder="Age"
-                            min="18"
-                            max="65"
-                            required>
-
-                    </div>
-
-                </div>
-
-
-                <div class="row">
-
-                    <div class="input-box">
-
-                        <i class="fa-solid fa-venus-mars"></i>
-
-                        <select required>
-
-                            <option value="">Gender</option>
-
-                            <option>Male</option>
-
-                            <option>Female</option>
-
-                            <option>Other</option>
-
-                        </select>
-
-                    </div>
-
-                    <div class="input-box">
-
-                        <i class="fa-solid fa-droplet"></i>
-
-                        <select required>
-
-                            <option value="">Blood Group</option>
-
-                            <option>A+</option>
-                            <option>A-</option>
-                            <option>B+</option>
-                            <option>B-</option>
-                            <option>AB+</option>
-                            <option>AB-</option>
-                            <option>O+</option>
-                            <option>O-</option>
-
-                        </select>
-
-                    </div>
-
-                </div>
-
-
-                <div class="row">
-
-                    <div class="input-box">
-
-                        <i class="fa-solid fa-weight-scale"></i>
-
-                        <input
-                            type="number"
-                            placeholder="Weight (kg)"
-                            required>
-
-                    </div>
-
-                    <div class="input-box">
-
-                        <i class="fa-solid fa-phone"></i>
-
-                        <input
-                            type="tel"
-                            placeholder="Mobile Number"
-                            required>
-
-                    </div>
-
-                </div>
-
-
-                <div class="input-box">
-
-                    <i class="fa-solid fa-envelope"></i>
-
-                    <input
-                        type="email"
-                        placeholder="Email Address"
-                        required>
-
-                </div>
-
-
-                <div class="input-box">
-
-                    <i class="fa-solid fa-location-dot"></i>
-
-                    <textarea
-                        rows="3"
-                        placeholder="Address"
-                        required></textarea>
-
-                </div>
-
-
-                <div class="input-box">
-
-                    <label>Last Blood Donation Date</label>
-
-                    <input
-                        type="date">
-
-                </div>
-
-
-                <div class="row">
-
-                    <div class="input-box">
-
-                        <i class="fa-solid fa-lock"></i>
-
-                        <input
-                            type="password"
-                            placeholder="Password"
-                            required>
-
-                    </div>
-
-                    <div class="input-box">
-
-                        <i class="fa-solid fa-lock"></i>
-
-                        <input
-                            type="password"
-                            placeholder="Confirm Password"
-                            required>
-
-                    </div>
-
-                </div>
-
-
-                <button type="submit">
-
-                    Register
-
+          <h2>Create Account</h2>
+
+          <p>Register as a Blood Donor</p>
+
+          <form id="registerForm" action="dashboard.html">
+            <div class="input-box">
+              <i class="fa-solid fa-user-tag"></i>
+
+              <select id="registerRole" name="role" required>
+                <option value="">Select Role</option>
+                <option value="Donor">Donor</option>
+                <option value="Hospital">Hospital</option>
+                <option value="Admin">Admin</option>
+              </select>
+            </div>
+
+            <div class="row">
+              <div class="input-box">
+                <i class="fa-solid fa-user"></i>
+
+                <input
+                  type="text"
+                  id="registerName"
+                  name="name"
+                  placeholder="Full Name"
+                  required
+                />
+
+                <small
+                  class="field-message"
+                  id="nameMessage"
+                  aria-live="polite"
+                ></small>
+              </div>
+
+              <div class="input-box">
+                <i class="fa-solid fa-cake-candles"></i>
+
+                <input
+                  type="number"
+                  id="donorAge"
+                  name="age"
+                  placeholder="Age"
+                  min="18"
+                  max="65"
+                  required
+                />
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="input-box">
+                <i class="fa-solid fa-venus-mars"></i>
+
+                <select required>
+                  <option value="">Gender</option>
+
+                  <option>Male</option>
+
+                  <option>Female</option>
+
+                  <option>Other</option>
+                </select>
+              </div>
+
+              <div class="input-box">
+                <i class="fa-solid fa-droplet"></i>
+
+                <select required>
+                  <option value="">Blood Group</option>
+
+                  <option>A+</option>
+                  <option>A-</option>
+                  <option>B+</option>
+                  <option>B-</option>
+                  <option>AB+</option>
+                  <option>AB-</option>
+                  <option>O+</option>
+                  <option>O-</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="input-box">
+                <i class="fa-solid fa-weight-scale"></i>
+
+                <input
+                  type="number"
+                  id="donorWeight"
+                  name="weight"
+                  placeholder="Weight (kg)"
+                  min="45"
+                  required
+                />
+              </div>
+
+              <div class="input-box">
+                <i class="fa-solid fa-phone"></i>
+
+                <input
+                  type="tel"
+                  id="mobileNumber"
+                  name="mobile"
+                  placeholder="Mobile Number"
+                  inputmode="numeric"
+                  pattern="[6-9][0-9]{9}"
+                  maxlength="10"
+                  required
+                />
+
+                <small
+                  class="field-message"
+                  id="mobileMessage"
+                  aria-live="polite"
+                ></small>
+              </div>
+            </div>
+
+            <div class="input-box">
+              <i class="fa-solid fa-envelope"></i>
+
+              <input
+                type="email"
+                id="registerEmail"
+                name="email"
+                placeholder="Email Address"
+                required
+              />
+
+              <small
+                class="field-message"
+                id="emailMessage"
+                aria-live="polite"
+              ></small>
+            </div>
+
+            <div class="input-box">
+              <i class="fa-solid fa-location-dot"></i>
+
+              <select id="location" name="location" required>
+                <option value="">Select Location in Tamil Nadu</option>
+                <option>Ariyalur</option>
+                <option>Chengalpattu</option>
+                <option>Chennai</option>
+                <option>Coimbatore</option>
+                <option>Cuddalore</option>
+                <option>Dharmapuri</option>
+                <option>Dindigul</option>
+                <option>Erode</option>
+                <option>Kallakurichi</option>
+                <option>Kancheepuram</option>
+                <option>Karur</option>
+                <option>Krishnagiri</option>
+                <option>Madurai</option>
+                <option>Mayiladuthurai</option>
+                <option>Nagapattinam</option>
+                <option>Namakkal</option>
+                <option>Nilgiris</option>
+                <option>Perambalur</option>
+                <option>Pudukkottai</option>
+                <option>Ramanathapuram</option>
+                <option>Ranipet</option>
+                <option>Salem</option>
+                <option>Sivaganga</option>
+                <option>Tenkasi</option>
+                <option>Thanjavur</option>
+                <option>Theni</option>
+                <option>Thoothukudi</option>
+                <option>Tiruchirappalli</option>
+                <option>Tirunelveli</option>
+                <option>Tirupathur</option>
+                <option>Tiruppur</option>
+                <option>Tiruvallur</option>
+                <option>Tiruvannamalai</option>
+                <option>Tiruvarur</option>
+                <option>Vellore</option>
+                <option>Viluppuram</option>
+                <option>Virudhunagar</option>
+              </select>
+            </div>
+
+            <div class="input-box">
+              <label>Last Blood Donation Date</label>
+
+              <input type="date" />
+            </div>
+
+            <div class="row">
+              <div class="input-box password-field">
+                <i class="fa-solid fa-lock"></i>
+
+                <input
+                  type="password"
+                  id="registerPassword"
+                  name="password"
+                  placeholder="Password"
+                  required
+                />
+
+                <button
+                  type="button"
+                  class="password-toggle"
+                  data-password-target="registerPassword"
+                  aria-label="Show password"
+                  aria-pressed="false"
+                >
+                  <i class="fa-solid fa-eye"></i>
                 </button>
 
+                <small
+                  class="field-message"
+                  id="passwordMessage"
+                  aria-live="polite"
+                ></small>
+              </div>
 
-                <p class="login-text">
+              <div class="input-box password-field">
+                <i class="fa-solid fa-lock"></i>
 
-                    Already have an account?
+                <input
+                  type="password"
+                  id="confirmPassword"
+                  name="confirmPassword"
+                  placeholder="Confirm Password"
+                  required
+                />
 
-                    <a href="login.html">
+                <button
+                  type="button"
+                  class="password-toggle"
+                  data-password-target="confirmPassword"
+                  aria-label="Show confirm password"
+                  aria-pressed="false"
+                >
+                  <i class="fa-solid fa-eye"></i>
+                </button>
 
-                        Login Here
+                <small
+                  class="field-message"
+                  id="confirmPasswordMessage"
+                  aria-live="polite"
+                ></small>
+              </div>
+            </div>
 
-                    </a>
+            <button type="submit">Register</button>
 
-                </p>
+            <p class="login-text">
+              Already have an account?
 
-            </form>
-
+              <a href="login.html"> Login Here </a>
+            </p>
+          </form>
         </div>
-
+      </div>
     </div>
 
-</div>
-
-<script src="js/script.js"></script>
-
-</body>
+    <script src="js/script.js"></script>
+  </body>
 </html>

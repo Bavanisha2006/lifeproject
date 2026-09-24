@@ -133,6 +133,10 @@ body{
     margin-bottom:8px;
 }
 
+.required-mark{
+    color:#d90429;
+}
+
 .input-box input,
 .input-box select,
 .input-box textarea{
