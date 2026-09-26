@@ -101,7 +101,7 @@
 
             <h3>Next Eligible Donation</h3>
 
-            <h2>12 Oct 2026</h2>
+            <h2 id="nextEligibleDonation" aria-live="polite">Not provided</h2>
           </div>
 
           <div class="card">
@@ -109,15 +109,15 @@
 
             <h3>Badge</h3>
 
-            <h2>Silver Donor</h2>
+            <h2 id="donorBadge" aria-live="polite">Donation count needed</h2>
           </div>
 
           <div class="card">
             <i class="fa-solid fa-heart"></i>
 
-            <h3>Lives Saved</h3>
+            <h3>Lives Saved (est.)</h3>
 
-            <h2>09</h2>
+            <h2 id="livesSaved" aria-live="polite">Not available</h2>
           </div>
         </section>
 
@@ -213,7 +213,9 @@
           <ul>
             <li>🩸 Blood donation camp on 25 July 2026.</li>
 
-            <li>❤️ You are eligible to donate after 12 Oct 2026.</li>
+            <li id="donationEligibilityNotification" aria-live="polite">
+              Add your last donation date to see your next eligibility date.
+            </li>
 
             <li>🏆 Congratulations! You earned the Silver Donor Badge.</li>
 

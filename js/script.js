@@ -36,13 +36,31 @@ document.addEventListener("DOMContentLoaded", function(){
     const role = document.getElementById("registerRole");
     const email = document.getElementById("registerEmail");
     const mobile = document.getElementById("mobileNumber");
-    const donationDate = document.querySelector("#registerForm input[type='date']");
+    const gender = document.getElementById("registerGender");
+    const donationDate = document.getElementById("lastDonationDate");
+    const donationCountGroup = document.getElementById("donationCountGroup");
+    const donationCount = document.getElementById("donationCount");
+    const donatedBeforeRadios = form.querySelectorAll('input[name="donatedBefore"]');
     const password = document.getElementById("registerPassword");
     const confirmPassword = document.getElementById("confirmPassword");
 
-    if(!name || !role || !email || !mobile || !password || !confirmPassword){
+    if(!name || !role || !gender || !email || !mobile || !donationCountGroup || !donationCount || !donatedBeforeRadios.length || !password || !confirmPassword){
         return;
     }
+
+    function updateDonationCountVisibility(){
+        const donatedBefore = form.querySelector('input[name="donatedBefore"]:checked')?.value === "yes";
+        donationCountGroup.hidden = !donatedBefore;
+        donationCount.disabled = !donatedBefore;
+        donationCount.required = donatedBefore;
+        if(!donatedBefore){
+            donationCount.value = "";
+        }
+    }
+
+    donatedBeforeRadios.forEach(function(radio){
+        radio.addEventListener("change", updateDonationCountVisibility);
+    });
 
     const messages = {
         name: document.getElementById("nameMessage"),
@@ -55,6 +73,8 @@ document.addEventListener("DOMContentLoaded", function(){
     if(donationDate){
         donationDate.max = new Date().toISOString().split("T")[0];
     }
+
+    updateDonationCountVisibility();
 
     if(messages.password){
         messages.password.textContent = "Use at least 12 characters, including an uppercase letter, number, and special character (! @ # $ % ^ & *).";
@@ -125,11 +145,16 @@ document.addEventListener("DOMContentLoaded", function(){
             event.preventDefault();
             form.reportValidity();
         } else {
+            const donatedBefore = form.querySelector('input[name="donatedBefore"]:checked').value === "yes";
             localStorage.setItem("userData", JSON.stringify({
                 name: name.value.trim(),
                 role: role.value,
+                gender: gender.value,
                 email: email.value.trim(),
                 phone: mobile.value,
+                lastDonationDate: donationDate ? donationDate.value : "",
+                donatedBefore: donatedBefore,
+                donationCount: donatedBefore ? Number(donationCount.value) : 0,
                 password: password.value
             }));
         }
@@ -158,9 +183,88 @@ document.addEventListener("DOMContentLoaded", function(){
 
 document.addEventListener("DOMContentLoaded", function(){
     const form = document.getElementById("loginForm");
+    const resetForm = document.getElementById("resetPasswordForm");
+    const forgotPasswordLink = document.getElementById("forgotPasswordLink");
+    const backToLoginLink = document.getElementById("backToLoginLink");
+    const title = document.getElementById("loginTitle");
+    const description = document.getElementById("loginDescription");
 
     if(!form){
         return;
+    }
+
+    function showLogin(message){
+        form.hidden = false;
+        if(resetForm){
+            resetForm.hidden = true;
+            resetForm.reset();
+        }
+        if(title){
+            title.textContent = "Login";
+        }
+        if(description){
+            description.textContent = message || "Sign in to continue";
+        }
+    }
+
+    if(resetForm && forgotPasswordLink && backToLoginLink){
+        forgotPasswordLink.addEventListener("click", function(event){
+            event.preventDefault();
+            form.hidden = true;
+            resetForm.hidden = false;
+            title.textContent = "Reset Password";
+            description.textContent = "Verify your account and choose a new password";
+            document.getElementById("resetEmail").focus();
+        });
+
+        backToLoginLink.addEventListener("click", function(event){
+            event.preventDefault();
+            showLogin();
+        });
+
+        const confirmNewPassword = document.getElementById("confirmNewPassword");
+        const newPassword = document.getElementById("newPassword");
+        confirmNewPassword.addEventListener("input", function(){
+            confirmNewPassword.setCustomValidity(
+                confirmNewPassword.value === newPassword.value ? "" : "Passwords must match."
+            );
+        });
+
+        resetForm.addEventListener("submit", function(event){
+            event.preventDefault();
+            const resetEmail = document.getElementById("resetEmail").value.trim();
+            const resetMobile = document.getElementById("resetMobile").value.trim();
+            const resetMessage = document.getElementById("resetMessage");
+
+            confirmNewPassword.setCustomValidity(
+                confirmNewPassword.value === newPassword.value ? "" : "Passwords must match."
+            );
+            if(!resetForm.checkValidity()){
+                resetForm.reportValidity();
+                return;
+            }
+
+            let registeredUser = null;
+            try {
+                registeredUser = JSON.parse(localStorage.getItem("userData") || "null");
+            } catch (error) {
+                registeredUser = null;
+            }
+
+            const emailMatches = registeredUser && registeredUser.email &&
+                registeredUser.email.trim().toLowerCase() === resetEmail.toLowerCase();
+            const mobileMatches = registeredUser && registeredUser.phone === resetMobile;
+
+            if(!emailMatches || !mobileMatches){
+                resetMessage.textContent = "Those details do not match the registered account.";
+                return;
+            }
+
+            registeredUser.password = newPassword.value;
+            localStorage.setItem("userData", JSON.stringify(registeredUser));
+            document.getElementById("loginEmail").value = registeredUser.email;
+            showLogin("Password reset. Sign in with your new password.");
+        });
     }
 
     form.addEventListener("submit", function(event){
@@ -182,13 +286,18 @@ document.addEventListener("DOMContentLoaded", function(){
             return;
         }
 
-        if(!registeredUser || registeredUser.email !== email || registeredUser.role !== role){
-            alert("Please register on the portal before you login.");
+        if(!registeredUser || typeof registeredUser.email !== "string" || !registeredUser.email.trim()){
+            alert("You are not registered yet. Please register before logging in.");
             window.location.href = "register.html";
             return;
         }
 
-        if(registeredUser.password !== password){
+        if(registeredUser.email.trim().toLowerCase() !== email.toLowerCase()){
+            alert("No account is registered with this email. Please register, or use the email you used to sign up.");
+            return;
+        }
+
+        if(registeredUser.role !== role || registeredUser.password !== password){
             alert("The email or password is incorrect.");
             return;
         }
@@ -200,15 +309,102 @@ document.addEventListener("DOMContentLoaded", function(){
 document.addEventListener("DOMContentLoaded", function(){
 
     const welcomeMessage = document.getElementById("welcomeMessage");
+    const nextEligibleDonation = document.getElementById("nextEligibleDonation");
+    const eligibilityNotification = document.getElementById("donationEligibilityNotification");
+    const donorBadge = document.getElementById("donorBadge");
+    const livesSaved = document.getElementById("livesSaved");
 
-    if(!welcomeMessage){
+    if(!welcomeMessage && !nextEligibleDonation && !donorBadge && !livesSaved){
         return;
     }
 
     try {
         const savedUser = JSON.parse(localStorage.getItem("userData") || "null");
-        if(savedUser && savedUser.name){
+        if(welcomeMessage && savedUser && savedUser.name){
             welcomeMessage.textContent = `Welcome, ${savedUser.name} 👋`;
+        }
+
+        if(donorBadge){
+            const donationCount = savedUser && Number.isInteger(Number(savedUser.donationCount))
+                ? Number(savedUser.donationCount)
+                : null;
+
+            if(donationCount === null || donationCount < 0){
+                donorBadge.textContent = "Donation count needed";
+            } else if(donationCount === 0){
+                donorBadge.textContent = "Welcome Donor";
+            } else if(donationCount < 25){
+                donorBadge.textContent = "Bronze Donor";
+            } else if(donationCount < 50){
+                donorBadge.textContent = "Silver Donor";
+            } else if(donationCount < 75){
+                donorBadge.textContent = "Gold Donor";
+            } else if(donationCount < 100){
+                donorBadge.textContent = "Emerald Donor";
+            } else {
+                donorBadge.textContent = "Ruby Donor";
+            }
+        }
+
+        if(livesSaved){
+            const donationCount = savedUser && Number.isInteger(Number(savedUser.donationCount))
+                ? Number(savedUser.donationCount)
+                : null;
+            livesSaved.textContent = donationCount !== null && donationCount >= 0
+                ? String(donationCount * 3)
+                : "Not available";
+        }
+
+        if(nextEligibleDonation){
+            let eligibilityText = "No previous donation date";
+            let notificationText = "Add your last donation date to see your next eligibility date.";
+
+            if(savedUser && savedUser.lastDonationDate){
+                const [year, month, day] = savedUser.lastDonationDate.split("-").map(Number);
+                const lastDonation = new Date(year, month - 1, day);
+                const validDate = lastDonation.getFullYear() === year &&
+                    lastDonation.getMonth() === month - 1 &&
+                    lastDonation.getDate() === day;
+                const intervalMonths = savedUser.gender === "Male" ? 3 :
+                    savedUser.gender === "Female" ? 4 : null;
+
+                if(validDate && intervalMonths){
+                    const nextDate = new Date(year, month - 1, 1);
+                    nextDate.setMonth(nextDate.getMonth() + intervalMonths);
+                    const lastDayOfTargetMonth = new Date(
+                        nextDate.getFullYear(),
+                        nextDate.getMonth() + 1,
+                        0
+                    ).getDate();
+                    nextDate.setDate(Math.min(day, lastDayOfTargetMonth));
+                    const formattedDate = new Intl.DateTimeFormat(undefined, {
+                        day: "numeric",
+                        month: "short",
+                        year: "numeric"
+                    }).format(nextDate);
+
+                    const today = new Date();
+                    today.setHours(0, 0, 0, 0);
+                    if(nextDate <= today){
+                        eligibilityText = "Eligible now";
+                        notificationText = `Eligible since ${formattedDate}.`;
+                    } else {
+                        eligibilityText = formattedDate;
+                        notificationText = `Next eligible donation: ${formattedDate}.`;
+                    }
+                } else if(validDate){
+                    eligibilityText = "Check with your blood center";
+                    notificationText = eligibilityText;
+                } else {
+                    eligibilityText = "Donation date unavailable";
+                    notificationText = eligibilityText;
+                }
+            }
+
+            nextEligibleDonation.textContent = eligibilityText;
+            if(eligibilityNotification){
+                eligibilityNotification.textContent = notificationText;
+            }
         }
     } catch (error) {
         console.warn("Unable to read saved user data:", error);

@@ -131,6 +131,39 @@ RIGHT PANEL
 
 }
 
+.login-box form[hidden]{
+
+    display:none;
+
+}
+
+.password-hint,
+.login-box .reset-message{
+
+    font-size:13px;
+    line-height:1.5;
+
+}
+
+.login-box .password-hint{
+
+    margin:-5px 0 15px;
+
+}
+
+.login-box .reset-message:empty{
+
+    display:none;
+
+}
+
+.login-box .reset-message:not(:empty){
+
+    color:#b5171e;
+    margin:0 0 15px;
+
+}
+
 /* ==========================
 INPUT BOX
 ========================== */
