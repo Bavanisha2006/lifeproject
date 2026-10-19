@@ -75,11 +75,11 @@
         <section class="search-box">
           <h3>Find Available Blood</h3>
 
-          <form>
+          <form id="bloodSearchForm">
             <div class="form-group">
-              <label>Blood Group</label>
+              <label for="searchBloodGroup">Blood Group</label>
 
-              <select required>
+              <select id="searchBloodGroup" required>
                 <option value="">Select Blood Group</option>
 
                 <option>A+</option>
@@ -94,9 +94,55 @@
             </div>
 
             <div class="form-group">
-              <label>City</label>
-
-              <input type="text" placeholder="Enter City" />
+              <label for="searchCity">City / District</label>
+              <input
+                id="searchCity"
+                type="text"
+                list="demoCities"
+                placeholder="Enter a city"
+                autocomplete="off"
+                required
+              />
+              <datalist id="demoCities">
+                <option value="Ariyalur"></option>
+                <option value="Chengalpattu"></option>
+                <option value="Cuddalore"></option>
+                <option value="Dharmapuri"></option>
+                <option value="Dindigul"></option>
+                <option value="Erode"></option>
+                <option value="Kallakurichi"></option>
+                <option value="Kancheepuram"></option>
+                <option value="Kanyakumari"></option>
+                <option value="Karur"></option>
+                <option value="Krishnagiri"></option>
+                <option value="Mayiladuthurai"></option>
+                <option value="Nagapattinam"></option>
+                <option value="Namakkal"></option>
+                <option value="Nilgiris"></option>
+                <option value="Perambalur"></option>
+                <option value="Pudukkottai"></option>
+                <option value="Ramanathapuram"></option>
+                <option value="Ranipet"></option>
+                <option value="Salem"></option>
+                <option value="Sivaganga"></option>
+                <option value="Tenkasi"></option>
+                <option value="Thanjavur"></option>
+                <option value="Theni"></option>
+                <option value="Thoothukudi"></option>
+                <option value="Tiruchirappalli"></option>
+                <option value="Tirunelveli"></option>
+                <option value="Tirupathur"></option>
+                <option value="Tiruppur"></option>
+                <option value="Tiruvallur"></option>
+                <option value="Tiruvannamalai"></option>
+                <option value="Tiruvarur"></option>
+                <option value="Vellore"></option>
+                <option value="Viluppuram"></option>
+                <option value="Virudhunagar"></option>
+                <option value="Chennai"></option>
+                <option value="Coimbatore"></option>
+                <option value="Madurai"></option>
+              </datalist>
             </div>
 
             <button type="submit">
@@ -105,6 +151,18 @@
               Search
             </button>
           </form>
+          <p class="data-note">
+            Demo directory only. Hospital stock and donor availability are not
+            live or verified.
+          </p>
+          <p
+            id="searchStatus"
+            class="search-status"
+            role="status"
+            aria-live="polite"
+          >
+            Select a blood group and enter Coimbatore, Chennai, or Madurai.
+          </p>
         </section>
 
         <!-- Search Results -->
@@ -112,48 +170,10 @@
         <section class="results">
           <h3>Available Blood Banks</h3>
 
-          <div class="card-container">
-            <div class="blood-card">
-              <h3>Apollo Hospital</h3>
-
-              <p><strong>Blood Group:</strong> O+</p>
-
-              <p><strong>Units:</strong> 18</p>
-
-              <p><strong>Location:</strong> Chennai</p>
-
-              <span class="available"> Available </span>
-
-              <button>View Details</button>
-            </div>
-
-            <div class="blood-card">
-              <h3>Government Hospital</h3>
-
-              <p><strong>Blood Group:</strong> O+</p>
-
-              <p><strong>Units:</strong> 12</p>
-
-              <p><strong>Location:</strong> Chennai</p>
-
-              <span class="available"> Available </span>
-
-              <button>Contact</button>
-            </div>
-
-            <div class="blood-card">
-              <h3>CMC Hospital</h3>
-
-              <p><strong>Blood Group:</strong> O+</p>
-
-              <p><strong>Units:</strong> 8</p>
-
-              <p><strong>Location:</strong> Vellore</p>
-
-              <span class="limited"> Limited Stock </span>
-
-              <button>Contact</button>
-            </div>
+          <div id="bloodBankResults" class="card-container">
+            <p class="empty-state">
+              Search to find city-matched blood centres.
+            </p>
           </div>
         </section>
 
@@ -172,46 +192,12 @@
                 <th>City</th>
 
                 <th>Status</th>
-
-                <th>Action</th>
               </tr>
             </thead>
 
-            <tbody>
+            <tbody id="nearbyDonorRows">
               <tr>
-                <td>Arun Kumar</td>
-
-                <td>O+</td>
-
-                <td>Chennai</td>
-
-                <td>Eligible</td>
-
-                <td><button>Contact</button></td>
-              </tr>
-
-              <tr>
-                <td>Priya</td>
-
-                <td>O+</td>
-
-                <td>Tambaram</td>
-
-                <td>Eligible</td>
-
-                <td><button>Contact</button></td>
-              </tr>
-
-              <tr>
-                <td>Rahul</td>
-
-                <td>O+</td>
-
-                <td>Velachery</td>
-
-                <td>Eligible</td>
-
-                <td><button>Contact</button></td>
+                <td colspan="4">Search to find city-matched donors.</td>
               </tr>
             </tbody>
           </table>
