@@ -60,7 +60,7 @@
               </select>
             </div>
 
-            <div class="row">
+            <div class="row" data-donor-only hidden>
               <div class="input-box">
                 <i class="fa-solid fa-user"></i>
 
@@ -94,7 +94,7 @@
               </div>
             </div>
 
-            <div class="row">
+            <div class="row" data-donor-only hidden>
               <div class="input-box">
                 <i class="fa-solid fa-venus-mars"></i>
 
@@ -112,7 +112,7 @@
               <div class="input-box">
                 <i class="fa-solid fa-droplet"></i>
 
-                <select required>
+                <select id="registerBloodGroup" name="bloodGroup" required>
                   <option value="">Blood Group</option>
 
                   <option>A+</option>
@@ -127,7 +127,7 @@
               </div>
             </div>
 
-            <div class="row">
+            <div class="row" data-donor-only hidden>
               <div class="input-box">
                 <i class="fa-solid fa-weight-scale"></i>
 
@@ -163,7 +163,7 @@
               </div>
             </div>
 
-            <div class="input-box">
+            <div class="input-box" data-account-fields hidden>
               <i class="fa-solid fa-envelope"></i>
 
               <input
@@ -181,7 +181,7 @@
               ></small>
             </div>
 
-            <fieldset class="donation-history">
+            <fieldset class="donation-history" data-donor-only hidden>
               <legend>Have you donated blood before?</legend>
               <div class="donation-options">
                 <label>
@@ -205,7 +205,12 @@
               </div>
             </fieldset>
 
-            <div class="input-box" id="donationCountGroup" hidden>
+            <div
+              class="input-box"
+              id="donationCountGroup"
+              data-donor-only
+              hidden
+            >
               <label for="donationCount"
                 >How many times have you donated blood?</label
               >
@@ -220,7 +225,7 @@
               />
             </div>
 
-            <div class="input-box">
+            <div class="input-box" data-donor-only hidden>
               <i class="fa-solid fa-location-dot"></i>
 
               <select id="location" name="location" required>
@@ -265,7 +270,7 @@
               </select>
             </div>
 
-            <div class="input-box">
+            <div class="input-box" data-donor-only hidden>
               <label for="lastDonationDate">Last Blood Donation Date</label>
 
               <input
@@ -275,7 +280,7 @@
               />
             </div>
 
-            <div class="row">
+            <div class="row" id="passwordFieldsRow" data-account-fields hidden>
               <div class="input-box password-field">
                 <i class="fa-solid fa-lock"></i>
 
@@ -304,7 +309,7 @@
                 ></small>
               </div>
 
-              <div class="input-box password-field">
+              <div class="input-box password-field" data-donor-only hidden>
                 <i class="fa-solid fa-lock"></i>
 
                 <input
@@ -330,6 +335,17 @@
                   id="confirmPasswordMessage"
                   aria-live="polite"
                 ></small>
+              </div>
+
+              <div class="input-box staff-only" data-staff-only hidden>
+                <i class="fa-solid fa-id-card"></i>
+                <input
+                  type="text"
+                  id="employeeId"
+                  name="employeeId"
+                  placeholder="Employee ID"
+                  autocomplete="off"
+                />
               </div>
             </div>
 

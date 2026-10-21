@@ -18,6 +18,132 @@ document.addEventListener("DOMContentLoaded", function(){
     if(!registeredUser || !registeredUser.email){
         alert("Please register on the website before accessing the portal.");
         window.location.replace("register.html");
+        return;
+    }
+
+    const allowedRoles = {
+        "dashboard.html": ["Donor"],
+        "profile.html": ["Donor"],
+        "search.html": ["Donor"],
+        "request.html": ["Donor"],
+        "admin.html": ["Admin", "Hospital"]
+    };
+    if(!allowedRoles[currentPage].includes(registeredUser.role)){
+        const destination = registeredUser.role === "Donor" ? "dashboard.html" : "admin.html";
+        window.location.replace(destination);
+    }
+});
+
+document.addEventListener("DOMContentLoaded", function(){
+    const adminDashboard = document.getElementById("adminDashboard");
+    if(!adminDashboard){
+        return;
+    }
+
+    let user = null;
+    try {
+        user = JSON.parse(localStorage.getItem("userData") || "null");
+    } catch (error) {
+        user = null;
+    }
+
+    if(!user){
+        return;
+    }
+
+    if(user.role === "Admin"){
+        adminDashboard.hidden = false;
+        return;
+    }
+    if(user.role !== "Hospital"){
+        return;
+    }
+
+    adminDashboard.hidden = true;
+    document.getElementById("hospitalDashboard").hidden = false;
+    document.getElementById("adminNavigation").hidden = true;
+    document.getElementById("hospitalNavigation").hidden = false;
+    document.getElementById("hospitalDisplayName").textContent = user.name || user.employeeId || "Hospital";
+
+    let requests = [];
+    let registeredUsers = [];
+    try {
+        requests = JSON.parse(localStorage.getItem("bloodRequests") || "[]");
+        registeredUsers = JSON.parse(localStorage.getItem("registeredUsers") || "[]");
+    } catch (error) {
+        requests = [];
+        registeredUsers = [];
+    }
+    if(!Array.isArray(requests)){
+        requests = [];
+    }
+    if(!Array.isArray(registeredUsers)){
+        registeredUsers = [];
+    }
+
+    document.getElementById("hospitalRequestCount").textContent = String(requests.length);
+
+    const accounts = registeredUsers.filter(function(account){
+        return account && typeof account === "object";
+    }).map(function(account){
+        if(typeof account.email === "string" && typeof user.email === "string" && account.email.toLowerCase() === user.email.toLowerCase()){
+            return Object.assign({}, account, user);
+        }
+        return account;
+    });
+    const donorDetails = document.getElementById("hospitalDonorDetails");
+    const donors = accounts.filter(function(account){
+        return account.role === "Donor";
+    });
+    donors.forEach(function(donor){
+        const row = document.createElement("tr");
+        [
+            donor.name,
+            donor.bloodGroup,
+            donor.age,
+            donor.gender,
+            donor.weight,
+            donor.phone,
+            donor.location,
+            donor.email,
+            donor.lastDonationDate,
+            donor.donationCount
+        ].forEach(function(value){
+            const cell = document.createElement("td");
+            cell.textContent = value === undefined || value === null || value === "" ? "Not available" : String(value);
+            row.appendChild(cell);
+        });
+        donorDetails.appendChild(row);
+    });
+    if(!donors.length){
+        const row = document.createElement("tr");
+        const cell = document.createElement("td");
+        cell.colSpan = 10;
+        cell.textContent = "No donor details available.";
+        row.appendChild(cell);
+        donorDetails.appendChild(row);
+    }
+
+    const adminDetails = document.getElementById("hospitalAdminDetails");
+    const admins = accounts.filter(function(account){
+        return account.role === "Admin";
+    });
+    admins.forEach(function(admin){
+        const row = document.createElement("tr");
+        [admin.employeeId, admin.email].forEach(function(value){
+            const cell = document.createElement("td");
+            cell.textContent = value || "Not available";
+            row.appendChild(cell);
+        });
+        adminDetails.appendChild(row);
+    });
+    if(!admins.length){
+        const row = document.createElement("tr");
+        const cell = document.createElement("td");
+        cell.colSpan = 2;
+        cell.textContent = "No admin details available.";
+        row.appendChild(cell);
+        adminDetails.appendChild(row);
     }
 });
 
@@ -37,19 +163,29 @@ document.addEventListener("DOMContentLoaded", function(){
     const email = document.getElementById("registerEmail");
     const mobile = document.getElementById("mobileNumber");
     const gender = document.getElementById("registerGender");
+    const age = document.getElementById("donorAge");
+    const bloodGroup = document.getElementById("registerBloodGroup");
+    const weight = document.getElementById("donorWeight");
+    const location = document.getElementById("location");
     const donationDate = document.getElementById("lastDonationDate");
     const donationCountGroup = document.getElementById("donationCountGroup");
     const donationCount = document.getElementById("donationCount");
     const donatedBeforeRadios = form.querySelectorAll('input[name="donatedBefore"]');
     const password = document.getElementById("registerPassword");
     const confirmPassword = document.getElementById("confirmPassword");
+    const employeeId = document.getElementById("employeeId");
+    const accountFields = form.querySelectorAll("[data-account-fields]");
+    const donorOnlySections = form.querySelectorAll("[data-donor-only]");
+    const donorOnlyFields = form.querySelectorAll("[data-donor-only] input, [data-donor-only] select");
+    const staffOnlySections = form.querySelectorAll("[data-staff-only]");
 
-    if(!name || !role || !gender || !email || !mobile || !donationCountGroup || !donationCount || !donatedBeforeRadios.length || !password || !confirmPassword){
+    if(!name || !role || !gender || !age || !bloodGroup || !weight || !location || !email || !mobile || !donationCountGroup || !donationCount || !donatedBeforeRadios.length || !password || !confirmPassword || !employeeId){
         return;
     }
 
     function updateDonationCountVisibility(){
-        const donatedBefore = form.querySelector('input[name="donatedBefore"]:checked')?.value === "yes";
+        const isDonor = role.value === "Donor";
+        const donatedBefore = isDonor && form.querySelector('input[name="donatedBefore"]:checked')?.value === "yes";
         donationCountGroup.hidden = !donatedBefore;
         donationCount.disabled = !donatedBefore;
         donationCount.required = donatedBefore;
@@ -57,6 +193,50 @@ document.addEventListener("DOMContentLoaded", function(){
             donationCount.value = "";
         }
     }
+
+    donorOnlyFields.forEach(function(field){
+        field.dataset.donorRequired = String(field.required);
+    });
+
+    function updateRegistrationFields(){
+        const selectedRole = role.value;
+        const isDonor = selectedRole === "Donor";
+        const isStaff = selectedRole === "Admin" || selectedRole === "Hospital";
+
+        accountFields.forEach(function(section){
+            section.hidden = !selectedRole;
+            section.querySelectorAll("input").forEach(function(field){
+                if(!selectedRole){
+                    field.disabled = true;
+                } else if(field.closest("[data-donor-only]")){
+                    field.disabled = !isDonor;
+                } else if(field.closest("[data-staff-only]")){
+                    field.disabled = !isStaff;
+                } else {
+                    field.disabled = false;
+                }
+            });
+        });
+
+        donorOnlySections.forEach(function(section){
+            section.hidden = !isDonor;
+        });
+        donorOnlyFields.forEach(function(field){
+            field.disabled = !isDonor;
+            field.required = isDonor && field.dataset.donorRequired === "true";
+        });
+
+        staffOnlySections.forEach(function(section){
+            section.hidden = !isStaff;
+        });
+        employeeId.disabled = !isStaff;
+        employeeId.required = isStaff;
+        employeeId.setCustomValidity("");
+        form.classList.toggle("staff-registration", isStaff);
+        updateDonationCountVisibility();
+    }
+
+    role.addEventListener("change", updateRegistrationFields);
 
     donatedBeforeRadios.forEach(function(radio){
         radio.addEventListener("change", updateDonationCountVisibility);
@@ -74,7 +254,7 @@ document.addEventListener("DOMContentLoaded", function(){
         donationDate.max = new Date().toISOString().split("T")[0];
     }
 
-    updateDonationCountVisibility();
+    updateRegistrationFields();
 
     if(messages.password){
         messages.password.textContent = "Use at least 12 characters, including an uppercase letter, number, and special character (! @ # $ % ^ & *).";
@@ -110,6 +290,12 @@ document.addEventListener("DOMContentLoaded", function(){
         return validMobile;
     }
 
+    function validateEmployeeId(){
+        const message = employeeId.value.trim() ? "" : "Please enter your employee ID.";
+        employeeId.setCustomValidity(message);
+        return !message;
+    }
+
     function validatePassword(){
         const validPassword = /^(?=.{12,}$)(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])/.test(password.value);
         const message = validPassword ? "" : "Password must be at least 12 characters and include an uppercase letter, number, and special character.";
@@ -139,24 +325,79 @@ document.addEventListener("DOMContentLoaded", function(){
     confirmPassword.addEventListener("input", validateConfirmPassword);
 
     form.addEventListener("submit", function(event){
-        const valid = validateName() && validateEmail() && validateMobile() && validatePassword() && validateConfirmPassword();
+        const isDonor = role.value === "Donor";
+        const isStaff = role.value === "Admin" || role.value === "Hospital";
+        const valid = validateEmail() && validatePassword() && (
+            isDonor
+                ? validateName() && validateMobile() && validateConfirmPassword()
+                : isStaff && validateEmployeeId()
+        );
 
         if(!valid || !form.checkValidity()){
             event.preventDefault();
             form.reportValidity();
         } else {
-            const donatedBefore = form.querySelector('input[name="donatedBefore"]:checked').value === "yes";
-            localStorage.setItem("userData", JSON.stringify({
-                name: name.value.trim(),
+            const userData = {
                 role: role.value,
-                gender: gender.value,
                 email: email.value.trim(),
-                phone: mobile.value,
-                lastDonationDate: donationDate ? donationDate.value : "",
-                donatedBefore: donatedBefore,
-                donationCount: donatedBefore ? Number(donationCount.value) : 0,
                 password: password.value
-            }));
+            };
+            if(isDonor){
+                const donatedBefore = form.querySelector('input[name="donatedBefore"]:checked').value === "yes";
+                Object.assign(userData, {
+                    name: name.value.trim(),
+                    age: Number(age.value),
+                    gender: gender.value,
+                    bloodGroup: bloodGroup.value,
+                    weight: Number(weight.value),
+                    phone: mobile.value,
+                    location: location.value,
+                    lastDonationDate: donationDate ? donationDate.value : "",
+                    donatedBefore: donatedBefore,
+                    donationCount: donatedBefore ? Number(donationCount.value) : 0,
+                    donorId: createDonorId()
+                });
+            } else {
+                userData.employeeId = employeeId.value.trim();
+            }
+            localStorage.setItem("userData", JSON.stringify(userData));
+            let registeredUsers = [];
+            try {
+                registeredUsers = JSON.parse(localStorage.getItem("registeredUsers") || "[]");
+            } catch (error) {
+                registeredUsers = [];
+            }
+            if(!Array.isArray(registeredUsers)){
+                registeredUsers = [];
+            }
+            const registeredUserIndex = registeredUsers.findIndex(function(account){
+                return account.email && account.email.toLowerCase() === userData.email.toLowerCase();
+            });
+            const accountSummary = {
+                email: userData.email,
+                role: userData.role,
+                ...(isDonor ? {
+                    name: userData.name,
+                    age: userData.age,
+                    gender: userData.gender,
+                    bloodGroup: userData.bloodGroup,
+                    weight: userData.weight,
+                    phone: userData.phone,
+                    location: userData.location,
+                    lastDonationDate: userData.lastDonationDate,
+                    donationCount: userData.donationCount
+                } : {
+                    employeeId: userData.employeeId
+                })
+            };
+            if(registeredUserIndex === -1){
+                registeredUsers.push(accountSummary);
+            } else {
+                registeredUsers[registeredUserIndex] = accountSummary;
+            }
+            localStorage.setItem("registeredUsers", JSON.stringify(registeredUsers));
+            event.preventDefault();
+            window.location.href = role.value === "Donor" ? "dashboard.html" : "admin.html";
         }
     });
 
@@ -180,6 +421,15 @@ document.addEventListener("DOMContentLoaded", function(){
         });
     });
 });
+
+function createDonorId(){
+    const values = new Uint32Array(1);
+    if(window.crypto && window.crypto.getRandomValues){
+        window.crypto.getRandomValues(values);
+        return `LL${String(values[0] % 1000000).padStart(6, "0")}`;
+    }
+    return `LL${String(Math.floor(Math.random() * 1000000)).padStart(6, "0")}`;
+}
 
 document.addEventListener("DOMContentLoaded", function(){
     const form = document.getElementById("loginForm");
@@ -302,7 +552,7 @@ document.addEventListener("DOMContentLoaded", function(){
             return;
         }
 
-        window.location.href = "dashboard.html";
+        window.location.href = role === "Donor" ? "dashboard.html" : "admin.html";
     });
 });
 
